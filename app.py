@@ -4,7 +4,7 @@ import plotly.express as px
 
 # --- НАСТРОЙКИ СТРАНИЦЫ ---
 st.set_page_config(
-    page_title="NutriPulse — Здоровое питание и баланс белка",
+    page_title="CalorieCraft — Здоровое питание и баланс белка",
     page_icon="🥗",
     layout="wide"
 )
@@ -36,16 +36,16 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- ШАПКА САЙТА ---
-st.title("🥗 NutriPulse")
+st.title("🥗 CalorieCraft")
 st.caption("Научный подход к здоровому питанию, балансу белка и построению рациона")
 
 # --- ВЕРХНЯЯ НАВИГАЦИЯ ---
-tab_main, tab_loss, tab_gain, tab_calc = st.tabs([
+tab_main, tab_loss, tab_gain, tab_calc = st.tabs(list((
     "ГЛАВНАЯ",
     "РАЦИОН ДЛЯ ПОХУДЕНИЯ",
     "РАЦИОН ДЛЯ НАБОРА МАССЫ",
     "КАЛЬКУЛЯТОР БЕЛКА"
-])
+)))
 # ==============================================================================
 # 0. ГЛАВНАЯ СТРАНИЦА (ОТКРЫТА ПРИ ВХОДЕ НА САЙТ)
 # ==============================================================================
@@ -85,12 +85,12 @@ with tab_main:
 
     with chart_col1:
         plate_df = pd.DataFrame({
-            "Компонент тарелки": [
+            "Компонент тарелки": list((
                 "Овощи, зелень и клетчатка (50%)",
                 "Полноценный белок (25%)",
                 "Сложные углеводы и полезные жиры (25%)"
-            ],
-            "Доля (%)": [50, 25, 25]
+            )),
+            "Доля (%)": list((50, 25, 25))
         })
         fig_plate = px.pie(
             plate_df,
@@ -98,7 +98,7 @@ with tab_main:
             names="Компонент тарелки",
             hole=0.45,
             title="🍽️ Принцип идеальной тарелки (каждый приём пищи)",
-            color_discrete_sequence=["#43A047", "#EF5350", "#FFA726"]
+            color_discrete_sequence=list(("#43A047", "#EF5350", "#FFA726"))
         )
         fig_plate.update_traces(textinfo="percent+label", textposition="inside")
         fig_plate.update_layout(showlegend=False, height=400, margin=dict(t=50, b=20, l=20, r=20))
@@ -106,14 +106,14 @@ with tab_main:
 
     with chart_col2:
         protein_roles = pd.DataFrame({
-            "Функция в организме": [
+            "Функция в организме": list((
                 "Мышцы и опорно-двигательный аппарат",
                 "Ферменты и обмен веществ",
                 "Иммунная защита (антитела)",
                 "Кожа, волосы, ногти и коллаген",
                 "Транспорт кислорода и гормоны"
-            ],
-            "Значимость (%)": [35, 25, 18, 12, 10]
+            )),
+            "Значимость (%)": list((40, 25, 15, 10, 10))
         })
         fig_roles = px.bar(
             protein_roles,
@@ -143,7 +143,7 @@ with tab_loss:
         "сохраняя мышцы и бодрость."
     )
 
-    l_col1, l_col2 = st.columns([1.2, 1])
+    l_col1, l_col2 = st.columns(list((1.2, 1)))
 
     with l_col1:
         st.subheader("🥗 Пример сбалансированного меню на день (~1650 ккал)")
@@ -167,9 +167,9 @@ with tab_loss:
     with l_col2:
         st.subheader("📊 Распределение калорий и БЖУ")
         loss_df = pd.DataFrame({
-            "Приём пищи": ["Завтрак", "Обед", "Перекус", "Ужин"],
-            "Калории":,
-            "Белки (г)": [28, 46, 22, 42]
+            "Приём пищи": list(("Завтрак", "Обед", "Перекус", "Ужин")),
+            "Калории": list((420, 530, 230, 470)),
+            "Белки (г)": list((28, 46, 22, 42))
         })
         fig_loss = px.bar(
             loss_df,
@@ -178,10 +178,10 @@ with tab_loss:
             text="Калории",
             color="Приём пищи",
             title="Распределение калорийности в течение дня",
-            color_discrete_sequence=["#66BB6A", "#2E7D32", "#A5D6A7", "#388E3C"]
+            color_discrete_sequence=list(("#66BB6A", "#2E7D32", "#A5D6A7", "#388E3C"))
         )
         fig_loss.update_traces(textposition="outside")
-        fig_loss.update_layout(showlegend=False, height=420, yaxis_range=[0, 620])
+        fig_loss.update_layout(showlegend=False, height=420, yaxis_range=list((0, 650)))
         st.plotly_chart(fig_loss, use_container_width=True)
 
         st.success("✅ **Итого за день:** ~1650 ккал | Белки: **138 г** | Жиры: **51 г** | Углеводы: **148 г**")
@@ -195,7 +195,7 @@ with tab_gain:
         "достаток сложных углеводов для энергии на тренировках и **1.6–2.2 г белка на каждый килограмм веса**."
     )
 
-    g_col1, g_col2 = st.columns([1.2, 1])
+    g_col1, g_col2 = st.columns(list((1.2, 1)))
 
     with g_col1:
         st.subheader("🥩 Пример высокобелкового меню на день (~2750 ккал)")
@@ -219,8 +219,8 @@ with tab_gain:
     with g_col2:
         st.subheader("📊 Баланс нутриентов при наборе массы")
         gain_df = pd.DataFrame({
-            "Макронутриент": ["Углеводы (50%)", "Белки (25%)", "Жиры (25%)"],
-            "Граммы в день": [333, 172, 76]
+            "Макронутриент": list(("Углеводы (50%)", "Белки (25%)", "Жиры (25%)")),
+            "Граммы в день": list((333, 172, 76))
         })
         fig_gain = px.pie(
             gain_df,
@@ -228,7 +228,7 @@ with tab_gain:
             names="Макронутриент",
             hole=0.4,
             title="Соотношение БЖУ в граммах (всего ~581 г нутриентов)",
-            color_discrete_sequence=["#FFA726", "#EF5350", "#42A5F5"]
+            color_discrete_sequence=list(("#FFA726", "#EF5350", "#42A5F5"))
         )
         fig_gain.update_traces(textinfo="label+value", textposition="inside")
         fig_gain.update_layout(showlegend=False, height=420)
@@ -249,17 +249,17 @@ with tab_calc:
         age = st.number_input("Ваш возраст (лет):", min_value=14, max_value=100, value=28, step=1)
 
     with in_col2:
-        gender = st.radio("Пол:", ["Мужской", "Женский"], horizontal=True)
-        activity = st.selectbox("Уровень физической активности:", [
+        gender = st.radio("Пол:", list(("Мужской", "Женский")), horizontal=True)
+        activity = st.selectbox("Уровень физической активности:", list((
             "Низкий (сидячий образ жизни, без тренировок)",
             "Умеренный (фитнес / прогулки 2–3 раза в неделю)",
             "Высокий (силовые или кардио тренировки 4–6 раз в неделю)"
-        ])
-        goal = st.selectbox("Главная цель:", [
+        )))
+        goal = st.selectbox("Главная цель:", list((
             "Поддержание здоровья и формы",
             "Похудение (сохранение мышц на дефиците)",
             "Набор мышечной массы"
-        ])
+        )))
 
     height_m = height / 100
     bmi = weight / (height_m ** 2)
@@ -309,12 +309,12 @@ with tab_calc:
 
     with g_chart1:
         comp_df = pd.DataFrame({
-            "Уровень потребления": [
+            "Уровень потребления": list((
                 "Минимум ВОЗ (чтобы не болеть)",
                 "Средний рацион обычного человека",
                 "ВАША ИНДИВИДУАЛЬНАЯ НОРМА"
-            ],
-            "Грамм белка в день": [round(calc_weight * 0.8), round(calc_weight * 1.0), daily_protein]
+            )),
+            "Грамм белка в день": list((round(calc_weight * 0.8), round(calc_weight * 1.0), daily_protein))
         })
         fig_comp = px.bar(
             comp_df,
@@ -323,23 +323,23 @@ with tab_calc:
             text="Грамм белка в день",
             color="Уровень потребления",
             title="📊 Сравнение вашей нормы с базовыми показателями",
-            color_discrete_sequence=["#B0BEC5", "#90CAF9", "#2E7D32"]
+            color_discrete_sequence=list(("#B0BEC5", "#90CAF9", "#2E7D32"))
         )
         fig_comp.update_traces(textposition="outside")
-        fig_comp.update_layout(showlegend=False, height=380, yaxis_range=[0, max(daily_protein * 1.3, 120)])
+        fig_comp.update_layout(showlegend=False, height=380, yaxis_range=list((0, max(daily_protein * 1.3, 120))))
         st.plotly_chart(fig_comp, use_container_width=True)
 
     with g_chart2:
         sources_df = pd.DataFrame({
-            "Продукт (на 100 г)": [
+            "Продукт (на 100 г)": list((
                 "Куриная грудка / индейка",
                 "Тунец / горбуша",
                 "Творог 5%",
                 "Говядина постная",
                 "Яйца куриные (2 шт)",
                 "Чечевица / нут (сухие)"
-            ],
-            "Белок (г)": [24, 22, 18, 21, 13, 24]
+            )),
+            "Белок (г)": list((23, 21, 18, 20, 13, 24))
         })
         fig_sources = px.bar(
             sources_df,
@@ -356,7 +356,7 @@ with tab_calc:
             showlegend=False,
             coloraxis_showscale=False,
             height=380,
-            xaxis_range=[0, 30],
+            xaxis_range=list((0, 30)),
             yaxis=dict(autorange="reversed")
         )
         st.plotly_chart(fig_sources, use_container_width=True)
